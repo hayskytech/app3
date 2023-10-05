@@ -1,0 +1,15 @@
+h1 {
+  color: blueviolet;
+  font-family: 'Times New Roman';
+  font-style: italic;
+}
+
+#apple {
+  background-color: aquamarine;
+  color: red;
+}
+
+.bat {
+  background-color: bisque;
+  color: blue;
+}
