@@ -1,16 +1,11 @@
 import React from 'react'
-import Main, { About, Home } from './comp/Main'
-import Books from './comp/Books'
-import Students from './comp/Students'
+import MainMenu from './comps/MainMenu'
+import 'semantic-ui-css/semantic.min.css'
 
 export default function App() {
   return (
     <div>
-      <Main />
-      <Home />
-      <About />
-      <Books />
-      <Students />
+      <MainMenu />
     </div>
   )
 }
