@@ -6,6 +6,7 @@ import Books from './Books'
 import { Menu } from 'semantic-ui-react'
 import Arthematic from '../pages/Arthematic'
 import ModalBox from '../pages/ModalBox'
+import LoadNews from './LoadNews'
 
 export default function MainMenu() {
   return (
@@ -18,6 +19,7 @@ export default function MainMenu() {
             <Route path="books" element={<Books />} />
             <Route path="calc" element={<Arthematic />} />
             <Route path="modal" element={<ModalBox />} />
+            <Route path="loadnews" element={<LoadNews />} />
             {/* <Route path="*" element={<NoPage />} /> */}
           </Route>
         </Routes>
@@ -49,6 +51,10 @@ function MenuItems() {
 
         <Menu.Item as={Link} to='/modal'>
           Modal
+        </Menu.Item>
+
+        <Menu.Item as={Link} to='/loadnews'>
+          Load News
         </Menu.Item>
 
       </Menu>
