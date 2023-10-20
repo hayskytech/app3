@@ -10,6 +10,8 @@ import LoadNews from './LoadNews'
 import TodoList from './TodoList'
 import MyProfile from './MyProfile'
 import GetNews from './GetNews'
+import StudentsList from '../props/StudentsList'
+import TodoListProps from '../props/TodoListProps'
 
 export default function MainMenu() {
   return (
@@ -26,6 +28,8 @@ export default function MainMenu() {
             <Route path="todolist" element={<TodoList />} />
             <Route path="myprofile" element={<MyProfile />} />
             <Route path="getnews" element={<GetNews />} />
+            <Route path="students" element={<StudentsList />} />
+            <Route path="TodoListProps" element={<TodoListProps />} />
             {/* <Route path="*" element={<NoPage />} /> */}
           </Route>
         </Routes>
@@ -71,6 +75,12 @@ function MenuItems() {
         </Menu.Item>
         <Menu.Item as={Link} to='/getnews'>
           Get News
+        </Menu.Item>
+        <Menu.Item as={Link} to='/students'>
+          Students
+        </Menu.Item>
+        <Menu.Item as={Link} to='/TodoListProps'>
+          TodoListProps
         </Menu.Item>
 
       </Menu>
