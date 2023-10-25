@@ -13,6 +13,7 @@ import GetNews from './GetNews'
 import StudentsList from '../props/StudentsList'
 import TodoListProps from '../props/TodoListProps'
 import TodoListEditable from './TodoListEditable'
+import TodoListMultiField from '../props/TodoListMultiField'
 
 export default function MainMenu() {
   return (
@@ -32,6 +33,7 @@ export default function MainMenu() {
             <Route path="students" element={<StudentsList />} />
             <Route path="TodoListProps" element={<TodoListProps />} />
             <Route path="TodoListEditable" element={<TodoListEditable />} />
+            <Route path="TodoListMultiField" element={<TodoListMultiField />} />
             {/* <Route path="*" element={<NoPage />} /> */}
           </Route>
         </Routes>
@@ -86,6 +88,9 @@ function MenuItems() {
         </Menu.Item>
         <Menu.Item as={Link} to='/TodoListEditable'>
           TodoListEditable
+        </Menu.Item>
+        <Menu.Item as={Link} to='/TodoListMultiField'>
+          TodoListMultiField
         </Menu.Item>
 
       </Menu>
