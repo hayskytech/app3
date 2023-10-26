@@ -14,6 +14,7 @@ import StudentsList from '../props/StudentsList'
 import TodoListProps from '../props/TodoListProps'
 import TodoListEditable from './TodoListEditable'
 import TodoListMultiField from '../props/TodoListMultiField'
+import DOM from '../props/DOM'
 
 export default function MainMenu() {
   return (
@@ -24,6 +25,7 @@ export default function MainMenu() {
             <Route index element={<HomePage />} />
             <Route path="about" element={<AboutPage />} />
             <Route path="books" element={<Books />} />
+            <Route path="dom" element={<DOM />} />
             <Route path="calc" element={<Arthematic />} />
             <Route path="modal" element={<ModalBox />} />
             <Route path="loadnews" element={<LoadNews />} />
@@ -51,24 +53,8 @@ function MenuItems() {
           <Link to="/">Home</Link>
         </Menu.Item>
 
-        <Menu.Item as={Link} to='/about'>
-          About
-        </Menu.Item>
-
-        <Menu.Item as={Link} to='/books'>
-          Books
-        </Menu.Item>
-
-        <Menu.Item as={Link} to='/calc'>
-          Calculator
-        </Menu.Item>
-
-        <Menu.Item as={Link} to='/modal'>
-          Modal
-        </Menu.Item>
-
-        <Menu.Item as={Link} to='/loadnews'>
-          Load News
+        <Menu.Item as={Link} to='/dom'>
+          DOM
         </Menu.Item>
 
         <Menu.Item as={Link} to='/todolist'>
