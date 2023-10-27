@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { createContext, useState } from 'react'
 import { BrowserRouter, Link, Outlet, Route, Routes } from 'react-router-dom'
 import HomePage from './HomePage'
 import AboutPage from './AboutPage'
@@ -15,31 +15,45 @@ import TodoListProps from '../props/TodoListProps'
 import TodoListEditable from './TodoListEditable'
 import TodoListMultiField from '../props/TodoListMultiField'
 import DOM from '../props/DOM'
+import Nested from '../advanced/Nested'
+
+export const UserContext = createContext('defaultValue')
+export const ThemeContext = createContext('')
 
 export default function MainMenu() {
+  const [user, setUser] = useState("Apple")
+  const [theme, setTheme] = useState('light')
   return (
     <div>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<MenuItems />}>
-            <Route index element={<HomePage />} />
-            <Route path="about" element={<AboutPage />} />
-            <Route path="books" element={<Books />} />
-            <Route path="dom" element={<DOM />} />
-            <Route path="calc" element={<Arthematic />} />
-            <Route path="modal" element={<ModalBox />} />
-            <Route path="loadnews" element={<LoadNews />} />
-            <Route path="todolist" element={<TodoList />} />
-            <Route path="myprofile" element={<MyProfile />} />
-            <Route path="getnews" element={<GetNews />} />
-            <Route path="students" element={<StudentsList />} />
-            <Route path="TodoListProps" element={<TodoListProps />} />
-            <Route path="TodoListEditable" element={<TodoListEditable />} />
-            <Route path="TodoListMultiField" element={<TodoListMultiField />} />
-            {/* <Route path="*" element={<NoPage />} /> */}
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <UserContext.Provider value={{ user, setUser, age: 20 }} >
+        <ThemeContext.Provider value={{ theme, setTheme }}>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<MenuItems />}>
+                <Route index element={<HomePage />} />
+                <Route path="about" element={<AboutPage />} />
+                <Route path="book" element={<Books />} />
+                <Route path="dom" element={<DOM />} />
+                <Route path="calc" element={<Arthematic />} />
+                <Route path="modal" element={<ModalBox />} />
+                <Route path="loadnews" element={<LoadNews />} />
+                <Route path="todolist" element={<TodoList />} />
+                <Route path="myprofile/:userid" element={<MyProfile />} />
+                <Route path="getnews" element={<GetNews />} />
+                <Route path="students/:id/:name" element={<StudentsList />} />
+                <Route path="students/:id" element={<StudentsList />} />
+                <Route path="students" element={<StudentsList />} />
+                <Route path="nested" element={<Nested />} />
+                <Route path="TodoListProps" element={<TodoListProps />} />
+                <Route path="TodoListEditable" element={<TodoListEditable />} />
+                <Route path="TodoListMultiField" element={<TodoListMultiField />} />
+                {/* <Route path="*" element={<NoPage />} /> */}
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </ThemeContext.Provider>
+      </UserContext.Provider>
+
     </div>
   )
 }
@@ -56,6 +70,12 @@ function MenuItems() {
         <Menu.Item as={Link} to='/dom'>
           DOM
         </Menu.Item>
+        <Menu.Item as={Link} to='/about'>
+          about
+        </Menu.Item>
+        <Menu.Item as={Link} to='/book'>
+          Book
+        </Menu.Item>
 
         <Menu.Item as={Link} to='/todolist'>
           Todo List
@@ -68,6 +88,9 @@ function MenuItems() {
         </Menu.Item>
         <Menu.Item as={Link} to='/students'>
           Students
+        </Menu.Item>
+        <Menu.Item as={Link} to='/nested'>
+          Nested
         </Menu.Item>
         <Menu.Item as={Link} to='/TodoListProps'>
           TodoListProps
@@ -85,3 +108,8 @@ function MenuItems() {
     </>
   )
 }
+
+
+
+
+
