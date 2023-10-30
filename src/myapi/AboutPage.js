@@ -8,8 +8,11 @@ export default function AboutPage() {
   console.log(x);
   return (
     <div>
-      {theme}
-      <h1>{user}</h1>
+
+      {user ?
+        <h1>Welcome {user.phoneNumber}</h1>
+        : <progress />
+      }
       <h1>{x.age}</h1>
       <button onClick={() => { setUser('Bat') }}>Change username</button>
 

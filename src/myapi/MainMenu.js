@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 import { BrowserRouter, Link, Outlet, Route, Routes } from 'react-router-dom'
 import HomePage from './HomePage'
 import AboutPage from './AboutPage'
@@ -16,16 +16,34 @@ import TodoListEditable from './TodoListEditable'
 import TodoListMultiField from '../props/TodoListMultiField'
 import DOM from '../props/DOM'
 import Nested from '../advanced/Nested'
+import OTPLogin from '../fb/OTPLogin'
+import { onAuthStateChanged, onIdTokenChanged } from 'firebase/auth';
+import { auth } from '../fb/firebase'
 
 export const UserContext = createContext('defaultValue')
 export const ThemeContext = createContext('')
 
 export default function MainMenu() {
-  const [user, setUser] = useState("Apple")
+  const [user, setUser] = useState(null)
   const [theme, setTheme] = useState('light')
+
+  useEffect(() => {
+    const unsubscribeAuthState = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+    });
+    const unsubscribeIdToken = onIdTokenChanged(auth, (user) => {
+      setUser(user);
+    });
+    return () => {
+      unsubscribeAuthState();
+      unsubscribeIdToken();
+    };
+  }, [auth]);
+
+
   return (
     <div>
-      <UserContext.Provider value={{ user, setUser, age: 20 }} >
+      <UserContext.Provider value={{ user, setUser }} >
         <ThemeContext.Provider value={{ theme, setTheme }}>
           <BrowserRouter>
             <Routes>
@@ -39,6 +57,7 @@ export default function MainMenu() {
                 <Route path="loadnews" element={<LoadNews />} />
                 <Route path="todolist" element={<TodoList />} />
                 <Route path="myprofile/:userid" element={<MyProfile />} />
+                <Route path="myprofile" element={<MyProfile />} />
                 <Route path="getnews" element={<GetNews />} />
                 <Route path="students/:id/:name" element={<StudentsList />} />
                 <Route path="students/:id" element={<StudentsList />} />
@@ -47,6 +66,7 @@ export default function MainMenu() {
                 <Route path="TodoListProps" element={<TodoListProps />} />
                 <Route path="TodoListEditable" element={<TodoListEditable />} />
                 <Route path="TodoListMultiField" element={<TodoListMultiField />} />
+                <Route path="account" element={<OTPLogin user={user} setUser={setUser} />} />
                 {/* <Route path="*" element={<NoPage />} /> */}
               </Route>
             </Routes>
@@ -100,6 +120,9 @@ function MenuItems() {
         </Menu.Item>
         <Menu.Item as={Link} to='/TodoListMultiField'>
           TodoListMultiField
+        </Menu.Item>
+        <Menu.Item as={Link} to='/account'>
+          Account
         </Menu.Item>
 
       </Menu>
