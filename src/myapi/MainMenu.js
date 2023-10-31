@@ -19,6 +19,7 @@ import Nested from '../advanced/Nested'
 import OTPLogin from '../fb/OTPLogin'
 import { onAuthStateChanged, onIdTokenChanged } from 'firebase/auth';
 import { auth } from '../fb/firebase'
+import OnlineTodos from '../fb/OnlineTodos'
 
 export const UserContext = createContext('defaultValue')
 export const ThemeContext = createContext('')
@@ -66,7 +67,8 @@ export default function MainMenu() {
                 <Route path="TodoListProps" element={<TodoListProps />} />
                 <Route path="TodoListEditable" element={<TodoListEditable />} />
                 <Route path="TodoListMultiField" element={<TodoListMultiField />} />
-                <Route path="account" element={<OTPLogin user={user} setUser={setUser} />} />
+                <Route path="account" element={<OTPLogin />} />
+                <Route path="onlinetodo" element={<OnlineTodos />} />
                 {/* <Route path="*" element={<NoPage />} /> */}
               </Route>
             </Routes>
@@ -99,6 +101,9 @@ function MenuItems() {
 
         <Menu.Item as={Link} to='/todolist'>
           Todo List
+        </Menu.Item>
+        <Menu.Item as={Link} to='/onlinetodo'>
+          Online Todo List
         </Menu.Item>
         <Menu.Item as={Link} to='/myprofile'>
           My Profile

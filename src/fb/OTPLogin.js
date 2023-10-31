@@ -53,9 +53,6 @@ export default function OTPLogin() {
 
   return (
     <>
-      <p>User: {JSON.stringify(user)}
-      </p>
-
       {user ?
         <>
           <p>User is logged in: {user.phoneNumber}</p>
