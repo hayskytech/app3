@@ -20,6 +20,7 @@ import OTPLogin from '../fb/OTPLogin'
 import { onAuthStateChanged, onIdTokenChanged } from 'firebase/auth';
 import { auth } from '../fb/firebase'
 import OnlineTodos from '../fb/OnlineTodos'
+import Students from '../sqldb/Students'
 
 export const UserContext = createContext('defaultValue')
 export const ThemeContext = createContext('')
@@ -69,6 +70,7 @@ export default function MainMenu() {
                 <Route path="TodoListMultiField" element={<TodoListMultiField />} />
                 <Route path="account" element={<OTPLogin />} />
                 <Route path="onlinetodo" element={<OnlineTodos />} />
+                <Route path='studentslist' element={<Students />} />
                 {/* <Route path="*" element={<NoPage />} /> */}
               </Route>
             </Routes>
@@ -111,7 +113,7 @@ function MenuItems() {
         <Menu.Item as={Link} to='/getnews'>
           Get News
         </Menu.Item>
-        <Menu.Item as={Link} to='/students'>
+        <Menu.Item as={Link} to='/studentslist'>
           Students
         </Menu.Item>
         <Menu.Item as={Link} to='/nested'>
