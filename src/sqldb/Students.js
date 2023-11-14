@@ -1,40 +1,44 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { UserContext } from '../App';
 
 export default function Students() {
+  const { user } = useContext(UserContext);
   const [list, setlist] = useState([])
   const [student, setStudent] = useState('')
   const [father, setFather] = useState('')
   const [refresh, setRefresh] = useState(false)
   useEffect(() => {
-    fetch('http://localhost:4000/students')
+    fetch('http://localhost:4000/api/persons')
       .then(res => res.json())
       .then(json => {
         setlist(json)
       })
   }, [refresh])
 
-  const d = document.getElementById("welcome")
 
   function addStudent() {
+    const d = document.getElementById("welcome")
     console.log('hai');
     d.showModal()
   }
   function closeBox() {
+    const d = document.getElementById("welcome")
     setStudent('')
     setFather('')
     d.close()
   }
   function handleForm() {
-    const data = { student, father }
+    const data = { fname: student, lname: father }
     const body = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        // 'Content-Type': 'application/x-www-form-urlencoded',
+        "Authorization": "Bearer " + user.token,
       },
       body: JSON.stringify(data)
     }
-    fetch('http://localhost:4000/students', body)
+
+    fetch('http://localhost:4000/api/persons/', body)
       .then(res => res.json())
       .then(json => {
         console.log(json)
@@ -47,10 +51,10 @@ export default function Students() {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        // 'Content-Type': 'application/x-www-form-urlencoded',
+        "Authorization": "Bearer " + user.token,
       }
     }
-    fetch('http://localhost:4000/students/' + id, body)
+    fetch('http://localhost:4000/api/persons/' + id, body)
       .then(res => res.json())
       .then(json => {
         console.log(json)
@@ -62,7 +66,7 @@ export default function Students() {
     <div>
       <h2>Students List</h2>
 
-      <button onClick={addStudent}>Add Student</button>
+      {user.token && <button onClick={addStudent}>Add Student</button>}
 
       <dialog id="welcome">
         <h3>Student Details</h3>
@@ -77,13 +81,11 @@ export default function Students() {
       <table className='ui blue unstackable collapsing table'>
         {
           list.map((item) => {
-            // if (item.student === null) {
-            //   return
-            // }
             return (
               <tr>
-                <td>{item.student}</td>
-                <td><button onClick={() => { deleteStudent(item.id) }}>Delete</button></td>
+                <td>{item.fname}</td>
+                <td>{item.lname}</td>
+                {user.token && <td><button onClick={() => { deleteStudent(item.id) }}>Delete</button></td>}
               </tr>
             )
           })

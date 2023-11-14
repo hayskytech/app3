@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { auth } from '../fb/firebase';
 import { getAuth, signOut, RecaptchaVerifier, signInWithPhoneNumber, onAuthStateChanged, onIdTokenChanged } from 'firebase/auth';
 import { Button } from 'semantic-ui-react';
-import { UserContext } from './MainMenu';
+import { UserContext } from '../App';
 import OTPLogin from '../fb/OTPLogin';
 
 
